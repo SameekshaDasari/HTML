@@ -1,0 +1,20 @@
+name: workflow for new branches
+
+on:
+  push:
+    - branches: ["new"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: Docker login
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+      - name: Push the image to DockerHub
+        run:  |
+          docker build -t ${{secrets.DOCKERHUB_KEY}}/newimage .
+          docker push -t ${{secrets.DOCKERHUB_KEY}}/newimage
