@@ -1,9 +1,5 @@
 FROM nginx:latest
 
-WORKDIR /app
+WORKDIR /usr/share/nginx/html
 
-COPY ..
-
-ENTRYPOINT ["docker","run"]
-
-CMD [""]
+COPY . /usr/share/nginx/html
