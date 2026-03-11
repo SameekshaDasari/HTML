@@ -2,7 +2,7 @@ name: workflow for new branches
 
 on:
   push:
-    - branches: ["new"]
+    branches: ["new"]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,4 +17,4 @@ jobs:
       - name: Push the image to DockerHub
         run:  |
           docker build -t ${{secrets.DOCKERHUB_KEY}}/newimage .
-          docker push -t ${{secrets.DOCKERHUB_KEY}}/newimage
+          docker push ${{secrets.DOCKERHUB_KEY}}/newimage
